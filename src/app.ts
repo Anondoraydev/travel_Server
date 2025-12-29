@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { UserRoutes } from "./app/modules/user/user.route";
 import cors from "cors";
-import { globalleErrorHandler } from "./app/middelewars/globaleErrorHandler";
+import { globalErrorHandler } from "./app/middelewars/globaleErrorHandler";
 
 const app = express();
 
@@ -13,6 +13,6 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "Server is running" });
 });
 
-app.use(globalleErrorHandler);
+app.use(globalErrorHandler);
 
 export default app;
