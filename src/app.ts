@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { UserRoutes } from "./app/modules/user/user.route";
 import cors from "cors";
 import { globalErrorHandler } from "./app/middelewars/globaleErrorHandler";
+import notFound from "./app/middelewars/notFound";
 
 const app = express();
 
@@ -14,5 +15,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use(globalErrorHandler);
+
+app.use(notFound);
 
 export default app;
