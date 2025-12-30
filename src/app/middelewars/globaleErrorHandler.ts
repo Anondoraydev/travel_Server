@@ -19,6 +19,7 @@ export const globalErrorHandler = (
   } else if (err instanceof Error) {
     statusCode = 500;
     message = err.message;
+    
   }
 
   res.status(statusCode).json({
