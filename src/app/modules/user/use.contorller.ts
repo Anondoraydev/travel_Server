@@ -3,7 +3,6 @@
 import { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status-codes";
 import { UserServices } from "./user.service";
-import { int } from "zod";
 import { catchAsync } from "../../utils/catsAsync";
 
 const createUser = catchAsync(
