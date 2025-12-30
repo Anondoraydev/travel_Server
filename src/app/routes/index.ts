@@ -1,14 +1,25 @@
-import { Router } from "express";
-import { UserRoutes } from "../modules/user/user.route";
+import { Router } from "express"
+import { UserRoutes } from "../modules/user/user.route"
 
-const router = Router();
-const modulesRoutes = [
-  {
-    path: "/user",
-    route: UserRoutes,
-  },
-];
+export const router = Router()
 
-modulesRoutes.forEach((route) => {
-  router.use(route.path, route.route);
-});
+const moduleRoutes = [
+    {
+        path: "/user",
+        route: UserRoutes
+    },
+    // {
+    //     path: "/tour",
+    //     route: TourRoutes
+    // },
+]
+
+moduleRoutes.forEach((route) => {
+    router.use(route.path, route.route)
+})
+
+// router.use("/user", UserRoutes)
+// router.use("/tour", TourRoutes)
+// router.use("/division", DivisionRoutes)
+// router.use("/booking", BookingRoutes)
+// router.use("/user", UserRoutes)
