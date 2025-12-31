@@ -1,29 +1,36 @@
+import AppError from "../../errorHelpers/AppError";
 import { IUser } from "./user.interface";
 import { User } from "./user.model";
+import httpStatus from "http-status-codes";
 
 const createUser = async (payload: Partial<IUser>) => {
-    const { name, email } = payload;
-    const user = await User.create({
-        name,
-        email
-    })
+  const { email, ...rest } = payload;
 
-    return user
+  const isUserExist = await User.findOne({ email });
+  if (isUserExist) {
+    throw new AppError(httpStatus.BAD_REQUEST, "User already exist");
+  }
 
-}
+  const user = await User.create({
+    email,
+    ...rest,
+  });
+
+  return user;
+};
 
 const getAllUsers = async () => {
-    const users = await User.find({});
-    const totalUsers = await User.countDocuments();
-    return {
-        data: users,
-        meta: {
-            total: totalUsers
-        }
-    }
+  const users = await User.find({});
+  const totalUsers = await User.countDocuments();
+  return {
+    data: users,
+    meta: {
+      total: totalUsers,
+    },
+  };
 };
 
 export const UserServices = {
-    createUser,
-    getAllUsers
-}
+  createUser,
+  getAllUsers,
+};
