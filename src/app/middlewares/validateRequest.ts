@@ -5,7 +5,7 @@ export const validateRequest =
   (zodSchema: ZodTypeAny) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      req.body = await zodSchema.parseAsync(req.body);
+      req.body = await zodSchema.parseAsync(req.body); 
       console.log(req.body);
       next();
     } catch (error) {
