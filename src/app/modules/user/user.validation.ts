@@ -1,4 +1,5 @@
 import z from "zod";
+import { IsActive, Role } from "./user.interface";
 // import { IsActive, Role } from "./user.interface";
 
 export const createUserZodSchema = z.object({
@@ -19,6 +20,13 @@ export const createUserZodSchema = z.object({
     .regex(/^(?=.*\d)/, {
       error: "Password must contain at least 1 number.",
     }),
+
+  role: z.enum(Object.values(Role) as [string]).optional(),
+  IsActive: z.enum(Object.values(IsActive) as [string]).optional(),
+  isDeleted: z.boolean({ error: "isDeleted must be true or false" }).optional(),
+  isVerified: z
+    .boolean({ error: "isVerified must be true or false" })
+    .optional(),
 
   phone: z
     .string({ error: "Phone number is required" })
